@@ -31,7 +31,7 @@ namespace YamlDotNet.RepresentationModel
     /// </summary>
     public class YamlStream : IEnumerable<YamlDocument>
     {
-        private readonly IList<YamlDocument> documents = new List<YamlDocument>();
+        private readonly IList<YamlDocument> documents;
 
         /// <summary>
         /// Gets the documents inside the stream.
@@ -50,6 +50,7 @@ namespace YamlDotNet.RepresentationModel
         /// </summary>
         public YamlStream()
         {
+            documents = new List<YamlDocument>();
         }
 
         /// <summary>
@@ -65,10 +66,7 @@ namespace YamlDotNet.RepresentationModel
         /// </summary>
         public YamlStream(IEnumerable<YamlDocument> documents)
         {
-            foreach (var document in documents)
-            {
-                this.documents.Add(document);
-            }
+            this.documents = new List<YamlDocument>(documents);
         }
 
         /// <summary>

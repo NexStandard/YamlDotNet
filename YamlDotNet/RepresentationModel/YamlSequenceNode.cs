@@ -25,7 +25,6 @@ using System.Diagnostics;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Helpers;
-using YamlDotNet.Serialization;
 using static YamlDotNet.Core.HashCode;
 
 namespace YamlDotNet.RepresentationModel
@@ -34,7 +33,7 @@ namespace YamlDotNet.RepresentationModel
     /// Represents a sequence node in the YAML document.
     /// </summary>
     [DebuggerDisplay("Count = {children.Count}")]
-    public sealed class YamlSequenceNode : YamlNode, IEnumerable<YamlNode>, IYamlConvertible
+    public sealed class YamlSequenceNode : YamlNode, IEnumerable<YamlNode>
     {
         private readonly IList<YamlNode> children = new List<YamlNode>();
 
@@ -290,14 +289,5 @@ namespace YamlDotNet.RepresentationModel
 
         #endregion
 
-        void IYamlConvertible.Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
-        {
-            Load(parser, new DocumentLoadingState());
-        }
-
-        void IYamlConvertible.Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
-        {
-            Emit(emitter, new EmitterState());
-        }
     }
 }

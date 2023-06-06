@@ -39,7 +39,7 @@ namespace YamlDotNet.Core
     public class Emitter : IEmitter
     {
         private static readonly Regex UriReplacer = new Regex(@"[^0-9A-Za-z_\-;?@=$~\\\)\]/:&+,\.\*\(\[!]",
-            StandardRegexOptions.Compiled | RegexOptions.Singleline);
+            RegexOptions.Compiled | RegexOptions.Singleline);
 
         private static readonly string[] newLineSeparators = new[] { "\r\n", "\r", "\n" };
 

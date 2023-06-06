@@ -1,0 +1,1 @@
+﻿Fork of YamlDotnet for custom source generation

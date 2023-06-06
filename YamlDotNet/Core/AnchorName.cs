@@ -29,7 +29,7 @@ namespace YamlDotNet.Core
         public static readonly AnchorName Empty = default;
 
         // https://yaml.org/spec/1.2/spec.html#id2785586
-        private static readonly Regex AnchorPattern = new Regex(@"^[^\[\]\{\},]+$", StandardRegexOptions.Compiled);
+        private static readonly Regex AnchorPattern = new Regex(@"^[^\[\]\{\},]+$", RegexOptions.Compiled);
 
         private readonly string? value;
 

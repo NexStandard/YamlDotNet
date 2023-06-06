@@ -24,7 +24,6 @@ using System.Collections.Generic;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Helpers;
-using YamlDotNet.Serialization;
 using static YamlDotNet.Core.HashCode;
 
 namespace YamlDotNet.RepresentationModel
@@ -32,7 +31,7 @@ namespace YamlDotNet.RepresentationModel
     /// <summary>
     /// Represents a mapping node in the YAML document.
     /// </summary>
-    public sealed class YamlMappingNode : YamlNode, IEnumerable<KeyValuePair<YamlNode, YamlNode>>, IYamlConvertible
+    public sealed class YamlMappingNode : YamlNode, IEnumerable<KeyValuePair<YamlNode, YamlNode>>
     {
         private readonly OrderedDictionary<YamlNode, YamlNode> children = new OrderedDictionary<YamlNode, YamlNode>();
 
@@ -240,7 +239,7 @@ namespace YamlDotNet.RepresentationModel
         /// <param name="state">The state.</param>
         internal override void Emit(IEmitter emitter, EmitterState state)
         {
-            emitter.Emit(new MappingStart(Anchor, Tag, true, Style));
+            emitter.Emit(new MappingStart(Anchor, Tag, false, Style));
             foreach (var entry in children)
             {
                 entry.Key.Save(emitter, state);
@@ -384,43 +383,5 @@ namespace YamlDotNet.RepresentationModel
         }
 
         #endregion
-
-        void IYamlConvertible.Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
-        {
-            Load(parser, new DocumentLoadingState());
-        }
-
-        void IYamlConvertible.Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
-        {
-            Emit(emitter, new EmitterState());
-        }
-
-        /// <summary>
-        /// Creates a <see cref="YamlMappingNode" /> containing a key-value pair for each property of the specified object.
-        /// </summary>
-        public static YamlMappingNode FromObject(object mapping)
-        {
-            if (mapping == null)
-            {
-                throw new ArgumentNullException(nameof(mapping));
-            }
-
-            var result = new YamlMappingNode();
-            foreach (var property in mapping.GetType().GetPublicProperties())
-            {
-                // CanRead == true => GetGetMethod() != null
-                if (property.CanRead && property.GetGetMethod(false)!.GetParameters().Length == 0)
-                {
-                    var value = property.GetValue(mapping, null);
-                    if (!(value is YamlNode valueNode))
-                    {
-                        var valueAsString = Convert.ToString(value);
-                        valueNode = valueAsString ?? string.Empty;
-                    }
-                    result.Add(property.Name, valueNode);
-                }
-            }
-            return result;
-        }
     }
 }

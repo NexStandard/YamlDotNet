@@ -24,7 +24,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
-using YamlDotNet.Serialization;
 using static YamlDotNet.Core.HashCode;
 
 namespace YamlDotNet.RepresentationModel
@@ -33,7 +32,7 @@ namespace YamlDotNet.RepresentationModel
     /// Represents a scalar node in the YAML document.
     /// </summary>
     [DebuggerDisplay("{Value}")]
-    public sealed class YamlScalarNode : YamlNode, IYamlConvertible
+    public sealed class YamlScalarNode : YamlNode
     {
         /// <summary>
         /// Gets or sets the value of the node.
@@ -165,16 +164,6 @@ namespace YamlDotNet.RepresentationModel
         public override YamlNodeType NodeType
         {
             get { return YamlNodeType.Scalar; }
-        }
-
-        void IYamlConvertible.Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
-        {
-            Load(parser, new DocumentLoadingState());
-        }
-
-        void IYamlConvertible.Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
-        {
-            Emit(emitter, new EmitterState());
         }
     }
 }

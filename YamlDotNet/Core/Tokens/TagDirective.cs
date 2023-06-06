@@ -52,7 +52,7 @@ namespace YamlDotNet.Core.Tokens
         {
         }
 
-        private static readonly Regex TagHandlePattern = new Regex(@"^!([0-9A-Za-z_\-]*!)?$", StandardRegexOptions.Compiled);
+        private static readonly Regex TagHandlePattern = new Regex(@"^!([0-9A-Za-z_\-]*!)?$", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TagDirective"/> class.
