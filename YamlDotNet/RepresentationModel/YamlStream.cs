@@ -31,13 +31,13 @@ namespace YamlDotNet.RepresentationModel
     /// </summary>
     public class YamlStream : IEnumerable<YamlDocument>
     {
-        private readonly IList<YamlDocument> documents;
+        private readonly List<YamlDocument> documents;
 
         /// <summary>
         /// Gets the documents inside the stream.
         /// </summary>
         /// <value>The documents.</value>
-        public IList<YamlDocument> Documents
+        public List<YamlDocument> Documents
         {
             get
             {
@@ -56,17 +56,9 @@ namespace YamlDotNet.RepresentationModel
         /// <summary>
         /// Initializes a new instance of the <see cref="YamlStream"/> class.
         /// </summary>
-        public YamlStream(params YamlDocument[] documents)
-            : this((IEnumerable<YamlDocument>)documents)
+        public YamlStream(List<YamlDocument> documents)
         {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="YamlStream"/> class.
-        /// </summary>
-        public YamlStream(IEnumerable<YamlDocument> documents)
-        {
-            this.documents = new List<YamlDocument>(documents);
+            this.documents = documents;
         }
 
         /// <summary>

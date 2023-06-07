@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
 
     <PackageProjectUrl>https://github.com/aaubry/YamlDotNet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/aaubry/YamlDotNet</RepositoryUrl>
@@ -16,10 +16,10 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>11.0</LangVersion>
     <Nullable>enable</Nullable>
 
-    <NetStandard>false</NetStandard>
+    <NetStandard>true</NetStandard>
     <RealTargetFramework>$(TargetFramework)</RealTargetFramework>
   </PropertyGroup>
 
