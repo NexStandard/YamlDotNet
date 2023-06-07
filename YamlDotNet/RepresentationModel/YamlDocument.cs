@@ -176,6 +176,9 @@ namespace YamlDotNet.RepresentationModel
             visitor.AssignAnchors(this);
         }
 
+        private DocumentEnd falseDocumentEnd = new DocumentEnd(false);
+        private DocumentStart documentStart = new DocumentStart();
+        private EmitterState state = new EmitterState();
         internal void Save(IEmitter emitter, bool assignAnchors = true)
         {
             if (assignAnchors)
@@ -183,9 +186,9 @@ namespace YamlDotNet.RepresentationModel
                 AssignAnchors();
             }
 
-            emitter.Emit(new DocumentStart());
-            RootNode.Save(emitter, new EmitterState());
-            emitter.Emit(new DocumentEnd(false));
+            emitter.Emit(documentStart);
+            RootNode.Save(emitter, state);
+            emitter.Emit(falseDocumentEnd);
         }
 
         /// <summary>
