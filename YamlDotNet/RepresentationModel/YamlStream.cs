@@ -21,6 +21,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 
@@ -52,21 +53,24 @@ namespace YamlDotNet.RepresentationModel
         {
             documents = new List<YamlDocument>();
         }
-
+        public YamlStream(int size)
+        {
+            documents = new List<YamlDocument>(size);
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="YamlStream"/> class.
         /// </summary>
         public YamlStream(params YamlDocument[] documents)
-            : this((IEnumerable<YamlDocument>)documents)
+            : this(documents.ToList())
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="YamlStream"/> class.
         /// </summary>
-        public YamlStream(IEnumerable<YamlDocument> documents)
+        public YamlStream(IList<YamlDocument> documents)
         {
-            this.documents = new List<YamlDocument>(documents);
+            this.documents = documents;
         }
 
         /// <summary>
@@ -129,9 +133,9 @@ namespace YamlDotNet.RepresentationModel
         {
             emitter.Emit(new StreamStart());
 
-            foreach (var document in documents)
+            for (int i=0; i < documents.Count; i++)
             {
-                document.Save(emitter, assignAnchors);
+                documents[i].Save(emitter, assignAnchors);
             }
 
             emitter.Emit(new StreamEnd());
