@@ -32,13 +32,13 @@ namespace YamlDotNet.RepresentationModel
     /// </summary>
     public class YamlStream : IEnumerable<YamlDocument>
     {
-        private readonly IList<YamlDocument> documents;
+        private readonly List<YamlDocument> documents;
 
         /// <summary>
         /// Gets the documents inside the stream.
         /// </summary>
         /// <value>The documents.</value>
-        public IList<YamlDocument> Documents
+        public List<YamlDocument> Documents
         {
             get
             {
