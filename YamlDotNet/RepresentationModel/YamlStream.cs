@@ -68,7 +68,7 @@ namespace YamlDotNet.RepresentationModel
         /// <summary>
         /// Initializes a new instance of the <see cref="YamlStream"/> class.
         /// </summary>
-        public YamlStream(IList<YamlDocument> documents)
+        public YamlStream(List<YamlDocument> documents)
         {
             this.documents = documents;
         }
