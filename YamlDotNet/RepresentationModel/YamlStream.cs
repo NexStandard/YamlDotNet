@@ -32,7 +32,7 @@ namespace YamlDotNet.RepresentationModel
     /// </summary>
     public class YamlStream : IEnumerable<YamlDocument>
     {
-        private readonly List<YamlDocument> documents;
+        private List<YamlDocument> documents;
 
         /// <summary>
         /// Gets the documents inside the stream.
@@ -86,7 +86,7 @@ namespace YamlDotNet.RepresentationModel
         /// Loads the stream from the specified input.
         /// </summary>
         /// <param name="input">The input.</param>
-        public void Load(TextReader input)
+        public void Load(TextReader input,int size=32)
         {
             Load(new Parser(input));
         }
@@ -94,9 +94,10 @@ namespace YamlDotNet.RepresentationModel
         /// <summary>
         /// Loads the stream from the specified <see cref="IParser"/>.
         /// </summary>
-        public void Load(IParser parser)
+        public void Load(IParser parser,int size=32)
         {
-            documents.Clear();
+            documents = new(size);
+
             parser.Consume<StreamStart>();
             while (!parser.TryConsume<StreamEnd>(out var _))
             {
