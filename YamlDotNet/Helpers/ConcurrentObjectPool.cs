@@ -56,10 +56,10 @@ namespace YamlDotNet.Helpers
             internal T? value;
         }
 
-        /// <remarks>
+        /// <summary>
         /// Not using System.Func{T} because this file is linked into the (debugger) Formatter,
         /// which does not have that type (since it compiles against .NET 2.0).
-        /// </remarks>
+        /// </summary>
         internal delegate T Factory();
 
         // Storage for the pool objects. The first item is stored in a dedicated field because we

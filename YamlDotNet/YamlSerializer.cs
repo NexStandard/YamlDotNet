@@ -1,5 +1,5 @@
-﻿// This file is part of YamlDotNet - A .NET library for YAML.
-// Copyright (c) Antoine Aubry and contributors
+﻿// This file is part of the nexstandard YamlDotNet fork - A .NET library for YAML.
+// Copyright (c) yfons123@gmail.com
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
@@ -19,14 +19,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
-using YamlDotNet.RepresentationModel;
 
-namespace YamlDotNet
+using System;
+
+namespace YamlDotNet.RepresentationModel
 {
-    public interface YamlSerializer
+    public interface IYamlSerializer<T>
+        where T : new()
     {
-        public Type SerializedType { get; }
-        YamlMappingNode ConvertToYaml(object obj,string className);
+        YamlMappingNode ConvertToYaml(T obj);
+        public T Deserialize(YamlMappingNode node);
+        public string IdentifierTag { get; }
+        public Type IdentifierType { get; }
     }
 }

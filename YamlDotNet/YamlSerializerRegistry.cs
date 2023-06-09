@@ -29,14 +29,6 @@ namespace Stride.Core.YamlDotNet
 {
     public class YamlSerializerRegistry
     {
-        private static List<YamlSerializer> Serializers;
-        public static void RegisterSerializer(YamlSerializer serializer)
-        {
-            Serializers.Add(serializer);
-        }
-        public void Serialize<T>(T objToSerialize)
-        {
-            Serializers.Where(s => s.SerializedType == objToSerialize.GetType());
-        }
+
     }
 }
