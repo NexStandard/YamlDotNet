@@ -545,16 +545,8 @@ namespace YamlDotNet.Core
             {
                 if (current is Scalar scalar)
                 {
-                    var isPlainImplicit = false;
-                    var isQuotedImplicit = false;
-                    if ((scalar.Style == ScalarStyle.Plain && tagName.IsEmpty) || tagName.IsNonSpecific)
-                    {
-                        isPlainImplicit = true;
-                    }
-                    else if (tagName.IsEmpty)
-                    {
-                        isQuotedImplicit = true;
-                    }
+                    var isPlainImplicit = (scalar.Style == ScalarStyle.Plain && tagName.IsEmpty) || tagName.IsNonSpecific;
+                    var isQuotedImplicit = tagName.IsEmpty;
 
                     state = states.Pop();
                     Skip();
