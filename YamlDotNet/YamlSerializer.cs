@@ -21,15 +21,47 @@
 
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace YamlDotNet.RepresentationModel
 {
+    /// <summary>
+    /// Defines a contract for classes that can serialize and deserialize YAML documents to and from objects of type <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of object to serialize and deserialize.</typeparam>
     public interface IYamlSerializer<T>
         where T : new()
     {
         YamlMappingNode ConvertToYaml(T obj);
+        /// <summary>
+        /// Deserializes each <see cref="YamlDocument"/> in the provided <see cref="TextReader"/> to an object of type <see cref="T"/>.
+        /// If the <see cref="TextReader"/> contains only one <see cref="YamlDocument"/>, the resulting <see cref="IEnumerable{T}"/> will contain only one element.
+        /// </summary>
+        /// <remarks>
+        /// If there are no <see cref="YamlDocument"/>s in the <see cref="TextReader"/>, it will return <see cref="Enumerable.Empty{T}"/>.
+        /// </remarks>
+        /// <param name="reader">The <see cref="TextReader"/> containing the YAML to deserialize.</param>
+        /// <returns>An <see cref="IEnumerable{T}"/> that contains all objects of the converted <see cref="YamlDocument"/>s.</returns>
+        public IEnumerable<T> DeserializeMany(TextReader reader);
+        /// <summary>
+        /// Converts a <see cref="YamlMappingNode"/> to an object of type <see cref="T"/>.
+        /// This method is used for recursive conversion of a nested <see cref="YamlMappingNode"/>.
+        /// </summary>
+        /// <param name="node">The <see cref="YamlMappingNode"/> to convert to an object of type <see cref="T"/>.</param>
+        /// <returns>An object of type <see cref="T"/> that represents the converted <see cref="YamlMappingNode"/>.</returns>
         public T Deserialize(YamlMappingNode node);
+        /// <summary>
+        /// Deserializes the first <see cref="YamlDocument"/> in the provided <see cref="TextReader"/> to an object of type <see cref="T"/>.
+        /// </summary>
+        /// <remarks>
+        /// The entire <see cref="TextReader"/> will be read.
+        /// </remarks>
+        /// <param name="reader">The <see cref="TextReader"/> containing the YAML to deserialize.</param>
+        /// <returns>An object of type <see cref="T"/> that represents the deserialized YAML document.</returns>
+        public T Deserialize(TextReader reader);
         public string IdentifierTag { get; }
+
         public Type IdentifierType { get; }
     }
 }
