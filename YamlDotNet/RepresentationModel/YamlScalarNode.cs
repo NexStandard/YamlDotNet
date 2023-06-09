@@ -143,7 +143,7 @@ namespace YamlDotNet.RepresentationModel
         /// <returns>
         /// A <see cref="string"/> that represents this instance.
         /// </returns>
-        internal override string ToString(RecursionLevel level)
+        internal override string ToString(ref RecursionLevel level)
         {
             return Value ?? string.Empty;
         }

@@ -144,10 +144,10 @@ namespace YamlDotNet.RepresentationModel
         public override string ToString()
         {
             var level = new RecursionLevel(MaximumRecursionLevel);
-            return ToString(level);
+            return ToString(ref level);
         }
 
-        internal abstract string ToString(RecursionLevel level);
+        internal abstract string ToString(ref RecursionLevel level);
 
         /// <summary>
         /// Gets all nodes from the document, starting on the current node.

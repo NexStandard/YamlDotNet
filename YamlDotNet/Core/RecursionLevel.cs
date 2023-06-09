@@ -28,7 +28,7 @@ namespace YamlDotNet.Core
     /// and throws <see cref="MaximumRecursionLevelReachedException"/>
     /// whenever <see cref="Maximum"/> is reached.
     /// </summary>
-    internal sealed class RecursionLevel
+    internal struct RecursionLevel
     {
         private int current;
         public int Maximum { get; }

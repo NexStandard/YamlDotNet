@@ -243,7 +243,7 @@ namespace YamlDotNet.RepresentationModel
         /// <returns>
         /// A <see cref="string"/> that represents this instance.
         /// </returns>
-        internal override string ToString(RecursionLevel level)
+        internal override string ToString(ref RecursionLevel level)
         {
             if (!level.TryIncrement())
             {
@@ -260,7 +260,7 @@ namespace YamlDotNet.RepresentationModel
                 {
                     text.Append(", ");
                 }
-                text.Append(child.ToString(level));
+                text.Append(child.ToString(ref level));
             }
 
             text.Append(" ]");
